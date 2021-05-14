@@ -96,8 +96,8 @@ public class Main {
                 count++;
             }
             if (count == 5) {
-                break;
                 System.out.println("We found 5 numbers already");
+                break;
             }
             
         }
