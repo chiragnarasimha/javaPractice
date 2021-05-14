@@ -9,15 +9,22 @@ public class Main {
 //        challenge2(200);
 //        sum3And5Challenge();
         long start = System.nanoTime();
-//        System.out.println("isPalindromeChirag = " + isPalindromeChirag(-1221));
-        System.out.println("isPalindromeChirag = " + isPalindromeChirag(1221));
-        timeTakenToRun(start);
+////        System.out.println("isPalindromeChirag = " + isPalindromeChirag(-1221));
+//        System.out.println("isPalindromeChirag = " + isPalindromeChirag(1221));
+//        timeTakenToRun(start);
+//
+//        start = System.nanoTime();
+////        System.out.println("isPalindromeChirag = " + isPalindromeChirag(-1221));
+//        System.out.println("isPalindromeUdemy = " + isPalindromeUdemy(1221));
+//        timeTakenToRun(start);
+
+
+
+        timeTakenToRun(System.nanoTime());
 
         start = System.nanoTime();
-//        System.out.println("isPalindromeChirag = " + isPalindromeChirag(-1221));
-        System.out.println("isPalindromeUdemy = " + isPalindromeUdemy(1221));
+        System.out.println(sumFirstAndLastDigit(0));
         timeTakenToRun(start);
-
 
     }
 
@@ -126,22 +133,54 @@ public class Main {
 
     }
 
-    public static boolean isPalindromeUdemy(int inputNumber){
+    public static boolean isPalindromeUdemy(int inputNumber) {
         int r = 0;
         int sum = 0;
-        while(inputNumber>0){
-            r=inputNumber%10;  //getting remainder
-            sum=(sum*10)+r;
-            inputNumber=inputNumber/10;
+        while (inputNumber > 0) {
+            r = inputNumber % 10;  //getting remainder
+            sum = (sum * 10) + r;
+            inputNumber = inputNumber / 10;
         }
         return inputNumber == sum;
-
-
     }
 
     public static void timeTakenToRun(long start) {
         long stop = System.nanoTime();
         System.out.println("Start = " + start + " | Stop = " + stop + " | Time taken = " + (double) ((stop - start) / 1e-6d) + "ms");
+    }
+
+    public static int sumFirstAndLastDigit(int number) {
+        int sum;
+        int count = 0;
+        int temp = number;
+        while (temp != 0) {
+            count++;
+            temp = temp / 10;
+        }
+        if (number < 0) {
+            sum = -1;
+        }
+        else if (number == 0) {
+            sum = 0;
+        }
+        else {
+            int numberToDivide = (int) Math.pow(10, count - 1);
+            // sum = First Number + Last Number
+            sum = (number / numberToDivide) + (number % 10);
+        }
+
+        return sum;
+
+    }
+
+    // method to find total number of digits
+    private static int findDigits(int number) {
+        int count = 0;
+        while (number != 0) {
+            count++;
+            number = number / 10;
+        }
+        return count;
     }
 
 
