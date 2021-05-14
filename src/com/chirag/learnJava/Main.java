@@ -4,10 +4,20 @@ public class Main {
 
     public static void main(String[] args) {
         // write your code here
-        printVariables();
-        challenge1();
-        challenge2(200);
-        sum3And5Challenge();
+//        printVariables();
+//        challenge1();
+//        challenge2(200);
+//        sum3And5Challenge();
+        long start = System.nanoTime();
+//        System.out.println("isPalindromeChirag = " + isPalindromeChirag(-1221));
+        System.out.println("isPalindromeChirag = " + isPalindromeChirag(1221));
+        timeTakenToRun(start);
+
+        start = System.nanoTime();
+//        System.out.println("isPalindromeChirag = " + isPalindromeChirag(-1221));
+        System.out.println("isPalindromeUdemy = " + isPalindromeUdemy(1221));
+        timeTakenToRun(start);
+
 
     }
 
@@ -92,16 +102,46 @@ public class Main {
 
             if ((i % 3 == 0) && (i % 5 == 0)) {
                 sum += i;
-                System.out.println("Can be divided by both 3 and 5 ->> "+i+" | Sum = " +sum);
+                System.out.println("Can be divided by both 3 and 5 ->> " + i + " | Sum = " + sum);
                 count++;
             }
             if (count == 5) {
                 System.out.println("We found 5 numbers already");
                 break;
             }
-            
+
         }
 
+    }
+
+    public static boolean isPalindromeChirag(Integer inputNumber) {
+        inputNumber = (Math.abs(inputNumber));
+        String inputNumberString = inputNumber.toString();
+        char[] inputNumberStringArray = inputNumberString.toCharArray();
+        String reverseNumberString = new String();
+        for (int i = inputNumberStringArray.length - 1; i >= 0; i--) {
+            reverseNumberString += inputNumberStringArray[i];
+        }
+        return reverseNumberString.equals(inputNumberString);
+
+    }
+
+    public static boolean isPalindromeUdemy(int inputNumber){
+        int r = 0;
+        int sum = 0;
+        while(inputNumber>0){
+            r=inputNumber%10;  //getting remainder
+            sum=(sum*10)+r;
+            inputNumber=inputNumber/10;
+        }
+        return inputNumber == sum;
+
+
+    }
+
+    public static void timeTakenToRun(long start) {
+        long stop = System.nanoTime();
+        System.out.println("Start = " + start + " | Stop = " + stop + " | Time taken = " + (double) ((stop - start) / 1e-6d) + "ms");
     }
 
 
