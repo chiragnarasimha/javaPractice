@@ -49,7 +49,6 @@ public class Main {
         }
         System.out.println("Average time to run = " + (sum / (double) numberOfTimesToRun) + "ms");
 
-        System.out.println(Integer.parseInt("0XA"));
 
 
     }
