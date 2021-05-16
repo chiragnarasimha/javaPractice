@@ -56,7 +56,8 @@ public class Main {
 
 //        scanUserInput();
 //        sumAllUserInputsChirag(5);
-        sumAllUserInputsTim(5);
+//        sumAllUserInputsTim(5);
+        minMaxChallenge(5);
     }
 
     public static void printVariables() {
@@ -565,6 +566,31 @@ public class Main {
             scanner.nextLine();
         }
         System.out.println("sum = " + sum);
+    }
+
+    public static void minMaxChallenge(int numberOfInputs) {
+        Scanner scanner = new Scanner(System.in);
+        int min = Integer.MAX_VALUE;
+        int max = Integer.MIN_VALUE;
+        for (int i = 0; i < numberOfInputs; i++) {
+            System.out.print("Enter Number: ");
+            if (scanner.hasNextInt()) {
+                int userInput = scanner.nextInt();
+                if (min > userInput) {
+                    min = userInput;
+                }
+                if (max < userInput) {
+                    max = userInput;
+                }
+            }
+            else {
+                System.out.println("Error: Please Enter a valid number!");
+                i--; // Decrement the counter to recapture user input
+            }
+            System.out.println("So far ->> min = " + min + " | max = " + max);
+            scanner.nextLine();
+        }
+
     }
 
 }
