@@ -1,8 +1,6 @@
 package com.chirag.learnJava;
 
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Main {
@@ -57,8 +55,8 @@ public class Main {
         System.out.println("Average time to run = " + (sum / (double) numberOfTimesToRun) + "ms");
 
 //        scanUserInput();
-        sumAllUserInputs(5);
-
+//        sumAllUserInputsChirag(5);
+        sumAllUserInputsTim(5);
     }
 
     public static void printVariables() {
@@ -532,23 +530,41 @@ public class Main {
         scanner.close();
     }
 
-    public static void sumAllUserInputs(int numberOfInputs) {
+    public static void sumAllUserInputsChirag(int numberOfInputs) {
         Scanner scanner = new Scanner(System.in);
         int sum = 0;
         for (int i = 1; i <= numberOfInputs; i++) {
             System.out.print("Please enter number #" + i + ": ");
             if (scanner.hasNextInt()) {
                 sum += scanner.nextInt();
-                scanner.nextLine(); // Handle user pressing the Enter Key
             }
             else {
                 System.out.println("Error: Please enter a valid integer!");
-                scanner.close();
+                i--;
             }
+            scanner.nextLine(); // Handle user pressing the Enter Key
         }
         scanner.close();
 
         System.out.println("The sum of all numbers is " + sum);
+    }
+
+    public static void sumAllUserInputsTim(int numberOfInputs) {
+        Scanner scanner = new Scanner(System.in);
+        int count = 1;
+        int sum = 0;
+        while (count <= numberOfInputs) {
+            System.out.print("Enter Number #" + count + ": ");
+            if (scanner.hasNextInt()) {
+                sum += scanner.nextInt();
+                count++;
+            }
+            else {
+                System.out.println("\nError: Please Enter a valid number!");
+            }
+            scanner.nextLine();
+        }
+        System.out.println("sum = " + sum);
     }
 
 }
