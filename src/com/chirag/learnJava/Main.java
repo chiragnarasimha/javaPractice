@@ -44,11 +44,11 @@ public class Main {
 //            System.out.println(hasSharedDigitUdemy(15, 13));
 //            System.out.println((hasSameLastDigit(10, 10, 1000)));
 //            System.out.println(numberToWords(123));
-            numberToWords(100);
+//            numberToWords(100);
+            System.out.println(canPack(1, 1, 11));
             sum += timeTakenToRun(start);
         }
         System.out.println("Average time to run = " + (sum / (double) numberOfTimesToRun) + "ms");
-
 
 
     }
@@ -413,6 +413,39 @@ public class Main {
 
 //        return concatString.toString();
 
+    }
+
+    public static boolean canPack(int bigCount, int smallCount, int goal) {
+
+        // First check to make sure that the input data is valid
+        boolean isPackable = !(bigCount < 0 || smallCount < 0 || goal < 0);
+
+        // Only proceed if we have met the basic condition to package
+        if (isPackable) {
+            int bigLimit = 5;
+            int smallLimit = 3;
+            int bigCountRequired = goal / bigLimit;
+            int smallCountRequired;
+
+            // Check if we have the required number of bigCount
+            if (bigCount >= bigCountRequired) {
+                // Calculate how many small counts we actually need
+                smallCountRequired = (goal - (bigCountRequired * bigLimit)) / smallLimit;
+
+                // Check if we need to cover the remaining capacity with smallCount
+                // We also need to check that the remaining amount can be packaged by smallCount. This is to check for the state when smallLimit is not 1.
+                isPackable = (smallCount >= smallCountRequired) && (goal - (bigCountRequired * bigLimit)) % smallLimit == 0;
+            }
+            else {
+                smallCountRequired = (goal - (bigCount * bigLimit)) / smallLimit;
+
+                // Check if we need to cover the remaining capacity with smallCount
+                // We also need to check that the remaining amount can be packaged by smallCount. This is to check for the state when smallLimit is not 1.
+                isPackable = (smallCount >= smallCountRequired) && (goal - (bigCount * bigLimit)) % smallLimit == 0;
+            }
+
+        }
+        return isPackable;
     }
 
 
