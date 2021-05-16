@@ -590,6 +590,7 @@ public class Main {
             System.out.println("So far ->> min = " + min + " | max = " + max);
             scanner.nextLine();
         }
+        scanner.close();
 
     }
 
