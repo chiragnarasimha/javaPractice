@@ -8,7 +8,7 @@ public class Main {
 //        challenge1();
 //        challenge2(200);
 //        sum3And5Challenge();
-        long start = System.nanoTime();
+        long start;
 ////        System.out.println("isPalindromeChirag = " + isPalindromeChirag(-1221));
 //        System.out.println("isPalindromeChirag = " + isPalindromeChirag(1221));
 //        timeTakenToRun(start);
@@ -18,13 +18,39 @@ public class Main {
 //        System.out.println("isPalindromeUdemy = " + isPalindromeUdemy(1221));
 //        timeTakenToRun(start);
 
+//
+//        start = System.nanoTime();
+//        System.out.println(sumFirstAndLastDigit(0));
+//        timeTakenToRun(start);
 
+//        start = System.nanoTime();
+//        System.out.println(getEvenDigitSum(0));
+//        timeTakenToRun(start);
+//        start = System.nanoTime();
+//        System.out.println(hasSharedDigitChirag(12, 13));
+//        timeTakenToRun(start);
+//        start = System.nanoTime();
+//
+//        System.out.println(hasSharedDigitUdemy(12, 13));
+//        timeTakenToRun(start);
 
-        timeTakenToRun(System.nanoTime());
+        double sum = 0;
+        int numberOfTimesToRun = 1000;
 
-        start = System.nanoTime();
-        System.out.println(sumFirstAndLastDigit(0));
-        timeTakenToRun(start);
+        for (int i = 0; i < numberOfTimesToRun; i++) {
+            System.out.println("");
+            start = System.nanoTime();
+//            System.out.println(hasSharedDigitChirag(12, 13));
+//            System.out.println(hasSharedDigitUdemy(15, 13));
+//            System.out.println((hasSameLastDigit(10, 10, 1000)));
+//            System.out.println(numberToWords(123));
+            numberToWords(100);
+            sum += timeTakenToRun(start);
+        }
+        System.out.println("Average time to run = " + (sum / (double) numberOfTimesToRun) + "ms");
+
+        System.out.println(Integer.parseInt("0XA"));
+
 
     }
 
@@ -144,9 +170,11 @@ public class Main {
         return inputNumber == sum;
     }
 
-    public static void timeTakenToRun(long start) {
+    public static double timeTakenToRun(long start) {
         long stop = System.nanoTime();
-        System.out.println("Start = " + start + " | Stop = " + stop + " | Time taken = " + (double) ((stop - start) / 1e-6d) + "ms");
+        double timeTaken = (double) ((stop - start) / 1e-6d);
+        System.out.println("Start = " + start + " | Stop = " + stop + " | Time taken = " + timeTaken + "ms");
+        return timeTaken;
     }
 
     public static int sumFirstAndLastDigit(int number) {
@@ -173,6 +201,105 @@ public class Main {
 
     }
 
+    public static int getEvenDigitSum(int number) {
+        int remainder;
+        int sum = 0;
+        if (number < 0) {
+            sum = -1;
+        }
+        else {
+            while (number != 0) {
+                remainder = number % 10;
+                number /= 10;
+                if (remainder % 2 == 0) {
+                    sum += remainder;
+                }
+            }
+        }
+        return sum;
+
+    }
+
+    public static boolean hasSharedDigitChirag(int number1, int number2) {
+        boolean isSharedDigit = false;
+        int lowerLimit = 10;
+        int upperLimit = 99;
+        int temp1 = 0, temp2 = 0, temp3 = 0;
+        int count1 = 0, count2 = 0;
+        if ((number1 >= lowerLimit && number1 <= upperLimit) && (number2 >= lowerLimit && number2 <= upperLimit)) {
+            while (number1 != 0) {
+                temp1 = number1 % 10;
+//                System.out.println("temp1 = " + temp1);
+                number1 /= 10;
+                temp3 = number2;
+                number2 /= 10;
+
+                while (temp3 != 0) {
+                    temp2 = temp3 % 10;
+                    temp3 /= 10;
+//                    System.out.println("temp2 = " + temp2);
+                    if (temp1 == temp2) {
+                        isSharedDigit = true;
+                    }
+                }
+
+
+            }
+
+        }
+        else {
+            isSharedDigit = false;
+        }
+        return isSharedDigit;
+    }
+
+    public static boolean hasSharedDigitUdemy(int x, int y) {
+        boolean isSharedDigit = false;
+        int lowerLimit = 10;
+        int upperLimit = 99;
+
+        if ((x >= lowerLimit && x <= upperLimit) && (y >= lowerLimit && y <= upperLimit)) {
+
+            // x%10 to extract the second digit
+            // x%10 == y%10 compare second digit
+            // x%10 == y/10 compare second x digit with first y digit
+            // x/10 to extract first digit
+
+
+            if ((x % 10 == y % 10 || x % 10 == y / 10) || (x / 10 == y % 10 || x / 10 == y / 10)) {
+                isSharedDigit = true;
+            }
+
+        }
+        else {
+            isSharedDigit = false;
+        }
+        return isSharedDigit;
+    }
+
+    public static boolean hasSameLastDigit(int x, int y, int z) {
+        boolean isSameLastDigit;
+        boolean isWithinLimits = isValid(x) && isValid(y) && isValid(z);
+
+        // Just retain the last digits
+        x = x % 10;
+        y = y % 10;
+        z = z % 10;
+
+        if (!isWithinLimits) {
+            isSameLastDigit = false;
+        }
+        else {
+            isSameLastDigit = (x == y || x == z) || (y == z);
+        }
+
+        return isSameLastDigit;
+    }
+
+    public static boolean isValid(int x) {
+        return (x >= 10 && x <= 1000);
+    }
+
     // method to find total number of digits
     private static int findDigits(int number) {
         int count = 0;
@@ -181,6 +308,112 @@ public class Main {
             number = number / 10;
         }
         return count;
+    }
+
+    public static int reverse(int number) {
+        int sum = 0;
+//        if (number < 0) {
+//            sum = -1;
+//        }
+//        else {
+        while (number != 0) {
+            sum = 10 * sum + number % 10;
+            number /= 10;
+        }
+
+//        }
+        return sum;
+    }
+
+    public static int getDigitCount(int number) {
+        int count = 0;
+        if (number == 0) {
+            count = 1;
+        }
+        else if (number < 0) {
+            count = -1;
+        }
+        else {
+            while (number != 0) {
+                count++;
+                number /= 10;
+            }
+        }
+
+
+        return count;
+    }
+
+    public static void numberToWords(int number) {
+        int totalNumberOfDigits = getDigitCount(number);
+        int numberInReverse = reverse(number);
+        int totalNumberOfDigitsInReverse = getDigitCount(numberInReverse);
+
+        int convertToWord = 0;
+//        StringBuilder concatString = new StringBuilder();
+
+        if (number == 0) {
+            System.out.println("Zero");
+        }
+        else if (number < 0) {
+            System.out.println("Invalid Value");
+        }
+        else {
+            while (numberInReverse != 0) {
+                convertToWord = numberInReverse % 10;
+                numberInReverse /= 10;
+                String numberInWord = "";
+                switch (convertToWord) {
+                    case 0:
+                        numberInWord = "Zero";
+                        break;
+                    case 1:
+                        numberInWord = "One";
+                        break;
+                    case 2:
+                        numberInWord = "Two";
+                        break;
+                    case 3:
+                        numberInWord = "Three";
+                        break;
+                    case 4:
+                        numberInWord = "Four";
+                        break;
+                    case 5:
+                        numberInWord = "Five";
+                        break;
+                    case 6:
+                        numberInWord = "Six";
+                        break;
+                    case 7:
+                        numberInWord = "Seven";
+                        break;
+                    case 8:
+                        numberInWord = "Eight";
+                        break;
+                    case 9:
+                        numberInWord = "Nine";
+                        break;
+                    default:
+                        numberInWord = "";
+                }
+
+//            concatString.append(numberInWord);
+
+                System.out.println(numberInWord);
+
+            }
+
+            if (totalNumberOfDigits != totalNumberOfDigitsInReverse) {
+                for (int i = 0; i < (totalNumberOfDigits - totalNumberOfDigitsInReverse); i++) {
+                    System.out.println("Zero");
+                }
+            }
+        }
+
+
+//        return concatString.toString();
+
     }
 
 
