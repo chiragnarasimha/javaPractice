@@ -35,7 +35,7 @@ public class Main {
 //        timeTakenToRun(start);
 
         double sum = 0;
-        int numberOfTimesToRun = 1000;
+        int numberOfTimesToRun = 1;
 
         for (int i = 0; i < numberOfTimesToRun; i++) {
             System.out.println("");
@@ -45,7 +45,8 @@ public class Main {
 //            System.out.println((hasSameLastDigit(10, 10, 1000)));
 //            System.out.println(numberToWords(123));
 //            numberToWords(100);
-            System.out.println(canPack(1, 1, 11));
+//            System.out.println(canPack(1, 1, 11));
+            printSquareStar(-5);
             sum += timeTakenToRun(start);
         }
         System.out.println("Average time to run = " + (sum / (double) numberOfTimesToRun) + "ms");
@@ -446,6 +447,64 @@ public class Main {
 
         }
         return isPackable;
+    }
+
+    public static void printSquareStar(int number) {
+        /*
+        * **** Planning ****
+        * Can do nested Loops.
+        * input is 8
+        * ********
+        * **    **
+        * * *  * *
+        * *  **  *
+        * * *  * *
+        * **    **
+        * ********
+        *
+        * Input is 6
+        * ******
+        * **  **
+        * * ** *
+        * **  **
+        * ******
+        * input is 9
+        * *********
+        * **     **
+        * * *   * *
+        * *  **   *
+        * * *   * *
+        * **     **
+        * *********
+        */
+
+        if (number < 5) {
+            System.out.println("Invalid Value");
+        }
+        else {
+            for (int i = 1; i <= number; i++) {
+                System.out.println("");
+                for (int j = 1; j <= number; j++) {
+                    // First row and last row will always have stars
+                    boolean isPrintStart = (i == 1 || i==number)
+                            || (j == 1 || j==number)
+                            || (i == j)
+                            ||  (j==number-i+1)
+                            ;
+//                    System.out.print(number-i+1);
+
+                    if(isPrintStart){
+                        System.out.print("*");
+                    }
+
+                    else {
+                        System.out.print(" ");
+                    }
+                    }
+
+
+            }
+        }
     }
 
 
