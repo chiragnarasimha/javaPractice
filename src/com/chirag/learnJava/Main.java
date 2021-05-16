@@ -1,5 +1,10 @@
 package com.chirag.learnJava;
 
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.Locale;
+import java.util.Scanner;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -51,6 +56,8 @@ public class Main {
         }
         System.out.println("Average time to run = " + (sum / (double) numberOfTimesToRun) + "ms");
 
+//        scanUserInput();
+        sumAllUserInputs(5);
 
     }
 
@@ -451,32 +458,32 @@ public class Main {
 
     public static void printSquareStar(int number) {
         /*
-        * **** Planning ****
-        * Can do nested Loops.
-        * input is 8
-        * ********
-        * **    **
-        * * *  * *
-        * *  **  *
-        * * *  * *
-        * **    **
-        * ********
-        *
-        * Input is 6
-        * ******
-        * **  **
-        * * ** *
-        * **  **
-        * ******
-        * input is 9
-        * *********
-        * **     **
-        * * *   * *
-        * *  **   *
-        * * *   * *
-        * **     **
-        * *********
-        */
+         * **** Planning ****
+         * Can do nested Loops.
+         * input is 8
+         * ********
+         * **    **
+         * * *  * *
+         * *  **  *
+         * * *  * *
+         * **    **
+         * ********
+         *
+         * Input is 6
+         * ******
+         * **  **
+         * * ** *
+         * **  **
+         * ******
+         * input is 9
+         * *********
+         * **     **
+         * * *   * *
+         * *  **   *
+         * * *   * *
+         * **     **
+         * *********
+         */
 
         if (number < 5) {
             System.out.println("Invalid Value");
@@ -486,26 +493,62 @@ public class Main {
                 System.out.println("");
                 for (int j = 1; j <= number; j++) {
                     // First row and last row will always have stars
-                    boolean isPrintStart = (i == 1 || i==number)
-                            || (j == 1 || j==number)
+                    boolean isPrintStart = (i == 1 || i == number)
+                            || (j == 1 || j == number)
                             || (i == j)
-                            ||  (j==number-i+1)
-                            ;
+                            || (j == number - i + 1);
 //                    System.out.print(number-i+1);
 
-                    if(isPrintStart){
+                    if (isPrintStart) {
                         System.out.print("*");
                     }
 
                     else {
                         System.out.print(" ");
                     }
-                    }
+                }
 
 
             }
         }
     }
 
+    public static void scanUserInput() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("\nEnter your Year of birth: ");
+
+        if (scanner.hasNextInt()) {
+            int yearOfBirth = scanner.nextInt();
+            scanner.nextLine(); // Handle user pressing the Enter Key
+            System.out.print("Enter your name: ");
+            String name = scanner.nextLine();
+            LocalDate todaysDate = LocalDate.now();
+            System.out.println("Hey " + name + ", you are " + (todaysDate.getYear() - yearOfBirth) + " years old!");
+        }
+        else {
+            System.out.println("Error: Please enter a number!");
+        }
+
+        scanner.close();
+    }
+
+    public static void sumAllUserInputs(int numberOfInputs) {
+        Scanner scanner = new Scanner(System.in);
+        int sum = 0;
+        for (int i = 1; i <= numberOfInputs; i++) {
+            System.out.print("Please enter number #" + i + ": ");
+            if (scanner.hasNextInt()) {
+                sum += scanner.nextInt();
+                scanner.nextLine(); // Handle user pressing the Enter Key
+            }
+            else {
+                System.out.println("Error: Please enter a valid integer!");
+                scanner.close();
+            }
+        }
+        scanner.close();
+
+        System.out.println("The sum of all numbers is " + sum);
+    }
 
 }
