@@ -40,24 +40,32 @@ public class Main {
         double sum = 0;
         int numberOfTimesToRun = 1;
 
-        for (int i = 0; i < numberOfTimesToRun; i++) {
-            System.out.println("");
-            start = System.nanoTime();
-//            System.out.println(hasSharedDigitChirag(12, 13));
-//            System.out.println(hasSharedDigitUdemy(15, 13));
-//            System.out.println((hasSameLastDigit(10, 10, 1000)));
-//            System.out.println(numberToWords(123));
-//            numberToWords(100);
-//            System.out.println(canPack(1, 1, 11));
-            printSquareStar(-5);
-            sum += timeTakenToRun(start);
-        }
-        System.out.println("Average time to run = " + (sum / (double) numberOfTimesToRun) + "ms");
+//        for (int i = 0; i < numberOfTimesToRun; i++) {
+//            System.out.println("");
+//            start = System.nanoTime();
+////            System.out.println(hasSharedDigitChirag(12, 13));
+////            System.out.println(hasSharedDigitUdemy(15, 13));
+////            System.out.println((hasSameLastDigit(10, 10, 1000)));
+////            System.out.println(numberToWords(123));
+////            numberToWords(100);
+////            System.out.println(canPack(1, 1, 11));
+//            printSquareStar(-5);
+//            sum += timeTakenToRun(start);
+//        }
+//        System.out.println("Average time to run = " + (sum / (double) numberOfTimesToRun) + "ms");
 
 //        scanUserInput();
 //        sumAllUserInputsChirag(5);
 //        sumAllUserInputsTim(5);
-        minMaxChallenge(5);
+//        minMaxChallenge(5);
+//        inputThenPrintSumAndAverage();
+        System.out.println(getBucketCount(3.4, 2.1, 1.5, 2));
+        System.out.println(getBucketCount(2.75, 3.25, 2.5, 1));
+        System.out.println(getBucketCount(3.4, 2.1, 1.5));
+        System.out.println(getBucketCount(7.25, 4.3, 2.35));
+        System.out.println(getBucketCount(3.4, 1.5));
+        System.out.println(getBucketCount(6.26, 2.2));
+        System.out.println(getBucketCount(3.26, 0.75));
     }
 
     public static void printVariables() {
@@ -570,8 +578,7 @@ public class Main {
 
     public static void minMaxChallenge(int numberOfInputs) {
         Scanner scanner = new Scanner(System.in);
-        int min = Integer.MAX_VALUE;
-        int max = Integer.MIN_VALUE;
+        int min = Integer.MAX_VALUE, max = Integer.MIN_VALUE;
         for (int i = 0; i < numberOfInputs; i++) {
             System.out.print("Enter Number: ");
             if (scanner.hasNextInt()) {
@@ -587,11 +594,75 @@ public class Main {
                 System.out.println("Error: Please Enter a valid number!");
                 i--; // Decrement the counter to recapture user input
             }
-            System.out.println("So far ->> min = " + min + " | max = " + max);
+            System.out.print("So far ->> min = " + min + " , max = " + max + " | ");
             scanner.nextLine();
         }
         scanner.close();
 
+    }
+
+    public static void inputThenPrintSumAndAverage() {
+        Scanner scanner = new Scanner(System.in);
+        int SUM = 0, count = 0;
+        long AVG = 0;
+        while (true) {
+//            System.out.print("Enter Number: ");
+            if (scanner.hasNextInt()) {
+                count++;
+                SUM += scanner.nextInt();
+                AVG = Math.round(((double) SUM / (double) count));
+            }
+            else {
+                break;
+            }
+        }
+        System.out.println("SUM = " + SUM + " AVG = " + AVG);
+
+    }
+
+    public static int getBucketCount(double width,
+                                     double height,
+                                     double areaPerBucket,
+                                     int extraBucket) {
+        int bucketCount;
+        if (width <= 0 || height <= 0 || areaPerBucket <= 0 || extraBucket < 0) {
+            bucketCount = -1;
+        }
+        else {
+            double wallArea = width * height;
+            double areaToCoveredByNewBucket = wallArea - (extraBucket * areaPerBucket);
+            bucketCount = (int) (Math.ceil(areaToCoveredByNewBucket / areaPerBucket));
+        }
+        return bucketCount;
+
+    }
+
+    public static int getBucketCount(double width,
+                                     double height,
+                                     double areaPerBucket) {
+        int bucketCount;
+        if (width <= 0 || height <= 0 || areaPerBucket <= 0) {
+            bucketCount = -1;
+        }
+        else {
+
+            double wallArea = width * height;
+            bucketCount = (int) Math.ceil(wallArea / areaPerBucket);
+        }
+        return bucketCount;
+    }
+
+    public static int getBucketCount(double area,
+                                     double areaPerBucket) {
+        int bucketCount;
+        if (area <= 0 || areaPerBucket <= 0) {
+            bucketCount = -1;
+        }
+        else {
+
+            bucketCount = (int) Math.ceil(area / areaPerBucket);
+        }
+        return bucketCount;
     }
 
 }
