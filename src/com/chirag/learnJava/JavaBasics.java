@@ -3,7 +3,7 @@ package com.chirag.learnJava;
 import java.time.LocalDate;
 import java.util.Scanner;
 
-public class javaBasics {
+public class JavaBasics {
     public static void printVariables() {
         System.out.println("From printVariables()");
         int myValue = 1000;
